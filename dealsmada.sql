@@ -10,23 +10,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema dealsmada
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `dealsmada` ;
 
 -- -----------------------------------------------------
--- Schema dealsmada
+-- Table `category`
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `dealsmada` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
-USE `dealsmada` ;
+DROP TABLE IF EXISTS `category` ;
 
--- -----------------------------------------------------
--- Table `dealsmada`.`category`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`category` ;
-
-CREATE TABLE IF NOT EXISTS `dealsmada`.`category` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '')
@@ -36,11 +26,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`city`
+-- Table `city`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`city` ;
+DROP TABLE IF EXISTS `city` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`city` (
+CREATE TABLE IF NOT EXISTS `city` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '')
@@ -50,11 +40,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`customer`
+-- Table `customer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`customer` ;
+DROP TABLE IF EXISTS `customer` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`customer` (
+CREATE TABLE IF NOT EXISTS `customer` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   `phoneNumber` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
@@ -69,11 +59,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`image`
+-- Table `image`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`image` ;
+DROP TABLE IF EXISTS `image` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`image` (
+CREATE TABLE IF NOT EXISTS `image` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `link` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   `path` TEXT NOT NULL COMMENT '',
@@ -84,11 +74,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`supplier`
+-- Table `supplier`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`supplier` ;
+DROP TABLE IF EXISTS `supplier` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`supplier` (
+CREATE TABLE IF NOT EXISTS `supplier` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   `presentation` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
@@ -103,11 +93,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`offer`
+-- Table `offer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`offer` ;
+DROP TABLE IF EXISTS `offer` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`offer` (
+CREATE TABLE IF NOT EXISTS `offer` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `title` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   `details` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
@@ -124,12 +114,12 @@ CREATE TABLE IF NOT EXISTS `dealsmada`.`offer` (
   INDEX `idCategory_idx` (`idCategory` ASC)  COMMENT '',
   CONSTRAINT `fk_offer_category`
     FOREIGN KEY (`idCategory`)
-    REFERENCES `dealsmada`.`category` (`id`)
+    REFERENCES `category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_offer_supplier`
     FOREIGN KEY (`idSupplier`)
-    REFERENCES `dealsmada`.`supplier` (`id`)
+    REFERENCES `supplier` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -138,11 +128,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`offer_city`
+-- Table `offer_city`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`offer_city` ;
+DROP TABLE IF EXISTS `offer_city` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_city` (
+CREATE TABLE IF NOT EXISTS `offer_city` (
   `idOffer` INT(11) NOT NULL COMMENT '',
   `idCity` INT(11) NOT NULL COMMENT '',
   INDEX `idOffer_idx` (`idOffer` ASC)  COMMENT '',
@@ -150,12 +140,12 @@ CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_city` (
   PRIMARY KEY (`idOffer`, `idCity`)  COMMENT '',
   CONSTRAINT `fk_offer_city_offer`
     FOREIGN KEY (`idOffer`)
-    REFERENCES `dealsmada`.`offer` (`id`)
+    REFERENCES `offer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_offer_city_city`
     FOREIGN KEY (`idCity`)
-    REFERENCES `dealsmada`.`city` (`id`)
+    REFERENCES `city` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -164,23 +154,23 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`offer_image`
+-- Table `offer_image`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`offer_image` ;
+DROP TABLE IF EXISTS `offer_image` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_image` (
+CREATE TABLE IF NOT EXISTS `offer_image` (
   `idOffer` INT(11) NOT NULL COMMENT '',
   `idImage` INT(11) NOT NULL COMMENT '',
   PRIMARY KEY (`idOffer`, `idImage`)  COMMENT '',
   INDEX `idImage_idx` (`idImage` ASC)  COMMENT '',
   CONSTRAINT `fk_offer_image_offer`
     FOREIGN KEY (`idOffer`)
-    REFERENCES `dealsmada`.`offer` (`id`)
+    REFERENCES `offer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_offer_image_image`
     FOREIGN KEY (`idImage`)
-    REFERENCES `dealsmada`.`image` (`id`)
+    REFERENCES `image` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -189,11 +179,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`offer_order`
+-- Table `offer_order`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`offer_order` ;
+DROP TABLE IF EXISTS `offer_order` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_order` (
+CREATE TABLE IF NOT EXISTS `offer_order` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `idOffer` INT(11) NOT NULL COMMENT '',
   `idCustomer` INT(11) NOT NULL COMMENT '',
@@ -204,12 +194,12 @@ CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_order` (
   INDEX `idCustomer_idx` (`idCustomer` ASC)  COMMENT '',
   CONSTRAINT `fk_offer_order_offer`
     FOREIGN KEY (`idOffer`)
-    REFERENCES `dealsmada`.`offer` (`id`)
+    REFERENCES `offer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_offer_order_customer`
     FOREIGN KEY (`idCustomer`)
-    REFERENCES `dealsmada`.`customer` (`id`)
+    REFERENCES `customer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -218,11 +208,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`sub_category`
+-- Table `sub_category`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`sub_category` ;
+DROP TABLE IF EXISTS `sub_category` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`sub_category` (
+CREATE TABLE IF NOT EXISTS `sub_category` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   `idCategory` INT(11) NOT NULL COMMENT '',
@@ -230,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `dealsmada`.`sub_category` (
   PRIMARY KEY (`id`, `idCategory`)  COMMENT '',
   CONSTRAINT `fk_sub_category_category`
     FOREIGN KEY (`idCategory`)
-    REFERENCES `dealsmada`.`category` (`id`)
+    REFERENCES `category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -239,23 +229,23 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`offer_sub_category`
+-- Table `offer_sub_category`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`offer_sub_category` ;
+DROP TABLE IF EXISTS `offer_sub_category` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_sub_category` (
+CREATE TABLE IF NOT EXISTS `offer_sub_category` (
   `idOffer` INT(11) NOT NULL COMMENT '',
   `idSubCategory` INT(11) NOT NULL COMMENT '',
   PRIMARY KEY (`idOffer`, `idSubCategory`)  COMMENT '',
   INDEX `idSubCategory_idx` (`idSubCategory` ASC)  COMMENT '',
   CONSTRAINT `fk_offer_sub_category_offer`
     FOREIGN KEY (`idOffer`)
-    REFERENCES `dealsmada`.`offer` (`id`)
+    REFERENCES `offer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_offer_sub_category_sub_category`
     FOREIGN KEY (`idSubCategory`)
-    REFERENCES `dealsmada`.`sub_category` (`id`)
+    REFERENCES `sub_category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -264,11 +254,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`tag`
+-- Table `tag`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`tag` ;
+DROP TABLE IF EXISTS `tag` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`tag` (
+CREATE TABLE IF NOT EXISTS `tag` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '')
@@ -278,23 +268,23 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`offer_tag`
+-- Table `offer_tag`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`offer_tag` ;
+DROP TABLE IF EXISTS `offer_tag` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_tag` (
+CREATE TABLE IF NOT EXISTS `offer_tag` (
   `idOffer` INT(11) NOT NULL COMMENT '',
   `idTag` INT(11) NOT NULL COMMENT '',
   PRIMARY KEY (`idOffer`, `idTag`)  COMMENT '',
   INDEX `idTag_idx` (`idTag` ASC)  COMMENT '',
   CONSTRAINT `fk_offer_tag_offer`
     FOREIGN KEY (`idOffer`)
-    REFERENCES `dealsmada`.`offer` (`id`)
+    REFERENCES `offer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_offer_tag_tag`
     FOREIGN KEY (`idTag`)
-    REFERENCES `dealsmada`.`tag` (`id`)
+    REFERENCES `tag` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -303,11 +293,11 @@ COLLATE = utf8_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `dealsmada`.`offer_view`
+-- Table `offer_view`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `dealsmada`.`offer_view` ;
+DROP TABLE IF EXISTS `offer_view` ;
 
-CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_view` (
+CREATE TABLE IF NOT EXISTS `offer_view` (
   `idOffer` INT(11) NOT NULL COMMENT '',
   `idCustomer` INT(11) NULL COMMENT '',
   `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '',
@@ -315,12 +305,12 @@ CREATE TABLE IF NOT EXISTS `dealsmada`.`offer_view` (
   INDEX `idCustomer_idx` (`idCustomer` ASC)  COMMENT '',
   CONSTRAINT `fk_offer_view_offer`
     FOREIGN KEY (`idOffer`)
-    REFERENCES `dealsmada`.`offer` (`id`)
+    REFERENCES `offer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_offer_view_customer`
     FOREIGN KEY (`idCustomer`)
-    REFERENCES `dealsmada`.`customer` (`id`)
+    REFERENCES `customer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
