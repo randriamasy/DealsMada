@@ -15,7 +15,7 @@
 <body>
 	<section class="container">
 		<div class="login">
-			<h1>Operator Manage</h1>
+			<h1>DealsMada Manage</h1>
 			<form method="post" action="<?=BASE_URL?>/login">
 				<p>
 					<input type="text" name="login" value="" placeholder="Login" />

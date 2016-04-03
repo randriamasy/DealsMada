@@ -4,9 +4,7 @@ session_cache_limiter(false);
 session_start();
 
 require_once './libs/Slim/Slim.php';
-require_once './libs/Swift/swift_required.php';
-require_once './model/report.class.php';
-require_once './model/reportpack.class.php';
+//require_once './model/city.class.php';
 
 /**
  * Adding Middle Layer to authenticate every request
@@ -74,26 +72,6 @@ function verifyRequiredImages($required_images) {
     }
 }
 
-/**
- * Adding Middle Layer to authenticate every API request
- * Checking Basic Authentication {email, password} POST fields
- */
-function authenticateAPI(\Slim\Route $route) {
-    $app = \Slim\Slim::getInstance();
-
-    // Get request credentials
-    $email = $app->request()->headers('PHP_AUTH_USER');
-    $password = $app->request()->headers('PHP_AUTH_PW');
-
-    $user = User::authenticate($email, $password);
-    if ($user == null) {
-
-        $app->response()->setStatus(403);
-        echo '{"error":{"text":"Authentication error"}}';
-        $app->stop();
-    }
-}
-
 // =======================================================================================
 // INIT APP
 // =======================================================================================
@@ -130,66 +108,29 @@ $app->get('/logout', function () use($app) {
 // =======================================================================================
 // HOME
 // =======================================================================================
+//$app->get('/', 'authenticate', function () use($app) {
 $app->get('/', function () use($app) {
 
-    $app->redirect(BASE_URL . '/report');
+    $app->render('container.php', array(
+        'content' => 'content_home.php'
+    ));
 });
 
 // =======================================================================================
-// REPORT
+// CITY
 // =======================================================================================
-$app->get('/report', function () use($app) {
-    $errors = ReportPack::selectAllErrors();
-    $events = ReportPack::selectAllEvents();
+$app->get('/city', function () use($app) {
+    $cities = City::selectAll();
     $app->render('container.php', array(
-        'content' => 'content_report_list.php',
-        'errors' => $errors,
-        'events' => $events,
+        'content' => 'content_city_list.php',
+        'cities' => $cities,
         'rootPath' => '../'
     ));
 });
 
-$app->get('/report/view/', function () use($app) {
-    $event = $_REQUEST['event'];
-    $reports = Report::selectAllByEvent($event);
-    $app->render('container.php', array(
-        'content' => 'content_report_item.php',
-        'reports' => $reports,
-        'rootPath' => '../../../'
-    ));
-});
-
-$app->post('/report/delete/', function () use($app) {
-    $event = $_REQUEST['event'];
-    Report::deleteAllByEvent($event);
-    $app->redirect(BASE_URL . '/report');
-});
-
-// =======================================================================================
-$app->post('/api/report', function () use($app) {
-
-    verifyRequiredParams(array(
-        'event',
-        'description',
-        'device',
-        'os',
-        'build'
-    ));
-
-    $event = $_REQUEST['event'];
-    $description = $_REQUEST['description'];
-    $device = $_REQUEST['device'];
-    $os = $_REQUEST['os'];
-    $build = $_REQUEST['build'];
-    
-    $success = Report::insert($event, $description, $device, $os, $build);
-    if ($success) {
-        $app->response->setStatus(200);
-        echo '{"result":"success"}';
-    } else {
-        $app->response->setStatus(404);
-        echo '{"error":{"text":"Failed to create send report"}}';
-    }
+$app->get('/city/delete/', function ($id) use($app) {
+    City::deleteById($id);
+    $app->redirect(BASE_URL . '/city');
 });
 
 // =======================================================================================
