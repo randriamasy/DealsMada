@@ -5,7 +5,7 @@ session_start();
 
 require_once './libs/Slim/Slim.php';
 require_once './model/config.php';
-//require_once './model/city.class.php';
+require_once './model/city.class.php';
 
 /**
  * Adding Middle Layer to authenticate every request

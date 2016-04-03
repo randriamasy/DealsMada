@@ -9,7 +9,7 @@ class City extends DBObject {
      * See database
      * city(id, name)
      */
-    static $tableName = 'city';
+    private static $tableName = 'city';
 
     // =======================================================================================
     static function selectAll() {
@@ -21,16 +21,17 @@ class City extends DBObject {
         $values = array(
             'name' => $name
         );
-        return DataBase::insert($tableName, $values);
+        return DataBase::insert(self::$tableName, $values);
     }
-    
+
     // =======================================================================================
     static function deleteById($id) {
         $conditions = array(
             'id' => $id
         );
-        return DataBase::delete($tableName, $conditions);
+        return DataBase::delete(self::$tableName, $conditions);
     }
+
 }
 
 ?>
