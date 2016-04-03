@@ -1,0 +1,342 @@
+/*!
+ * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Toggle Styles */
+#wrapper {
+	padding-left: 0;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+	padding-left: 250px;
+}
+
+#sidebar-wrapper {
+	z-index: 1000;
+	position: fixed;
+	left: 250px;
+	width: 0;
+	height: 100%;
+	margin-left: -250px;
+	overflow-y: auto;
+	background: #000;//#091949;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+	width: 250px;
+}
+
+#page-content-wrapper {
+	width: 100%;
+	position: absolute;
+	padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+	position: absolute;
+	margin-right: -250px;
+}
+
+/* Sidebar Styles */
+.sidebar-nav {
+	position: absolute;
+	top: 0;
+	width: 250px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sidebar-nav li {
+	text-indent: 20px;
+	line-height: 40px;
+}
+
+.sidebar-nav li a {
+	display: block;
+	text-decoration: none;
+	color: #D5DDE5;
+}
+
+.sidebar-nav li a:hover {
+	text-decoration: none;
+	color: #fff;
+	background: #ff7f00;//#436FB4;
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+	text-decoration: none;
+}
+
+.sidebar-nav>.sidebar-brand {
+	height: 65px;
+	font-size: 18px;
+	line-height: 60px;
+}
+
+.sidebar-nav>.sidebar-brand a {
+	color: #E8E8E8;
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
+	color: #fff;
+	background: none;
+}
+
+@media ( min-width :768px) {
+	#wrapper {
+		padding-left: 250px;
+	}
+	#wrapper.toggled {
+		padding-left: 0;
+	}
+	#sidebar-wrapper {
+		width: 250px;
+	}
+	#wrapper.toggled #sidebar-wrapper {
+		width: 0;
+	}
+	#page-content-wrapper {
+		padding: 20px;
+		position: relative;
+	}
+	#wrapper.toggled #page-content-wrapper {
+		position: relative;
+		margin-right: 0;
+	}
+}
+
+/*** Table Styles **/
+table {
+	width: 100%;
+}
+
+.table-fill {
+	background: white;
+	border-collapse: collapse;
+	margin: auto;
+	padding: 5px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+	animation: float 5s infinite;
+}
+
+th {
+	color: #D5DDE5;
+	background: #9ea7af;
+	border-bottom: 4px solid #9ea7af;
+	border-right: 1px solid #9ea7af;
+	font-weight: 200;
+	padding: 5px;
+	text-align: left;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	vertical-align: middle;
+}
+
+th:first-child {
+	
+}
+
+th:last-child {
+	
+}
+
+tr {
+	border-top: 1px solid #9ea7af;
+	border-bottom-: 1px solid #9ea7af;
+	color: #666B85;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+tr:hover td {
+	background: #EBEBEB;
+}
+
+tr:first-child {
+	
+}
+
+tr:last-child {
+	
+}
+
+tr:nth-child(odd) td {
+	/*background: #EBEBEB;*/
+	
+}
+
+tr:nth-child(odd):hover td {
+	background: #EBEBEB;
+}
+
+tr:last-child td:first-child {
+	
+}
+
+tr:last-child td:last-child {
+	
+}
+
+td {
+	background: #FFFFFF;
+	padding: 5px;
+	text-align: center;
+	vertical-align: middle;
+	border-right: 1px solid #9ea7af;
+	border-left: 1px solid #9ea7af;
+	border-bottom: 1px solid #9ea7af;
+}
+
+td:last-child {
+	
+}
+
+th {
+	text-align: center;
+}
+
+/* th.text-left {
+	text-align: left;
+}
+
+th.text-center {
+	text-align: center;
+}
+
+th.text-right {
+	text-align: right;
+}
+
+td.text-left {
+	text-align: left;
+}
+
+td.text-center {
+	text-align: center;
+}
+
+td.text-right {
+	text-align: right;
+} */
+
+h1 {
+	font-size: 24px;
+	font-weight: 200;
+}
+
+a:hover {
+	color: #ff7f00;
+}
+
+img {
+	height: 24px;
+	line-height: 50px;
+	text-align: center;
+}
+
+textarea {
+	width: 100%;
+	height: 2em;
+}
+input[type='checkbox']{      
+   background-repeat: no-repeat;
+   background-size:97px 143px;
+   width:97px;
+   height:143px;
+   margin:10px;
+   padding: 0;
+   -moz-appearance: none; /* not working */
+   -webkit-appearance: none;
+   -ms-appearance: none; /*not working */
+   -o-appearance: none;
+   appearance: none;
+   border: solid 1px grey;
+	border-radius:10px;
+	cursor: url("../assets/add.png"),pointer;
+}
+input[type='checkbox']:checked{
+	box-shadow: 5px 5px grey;
+}
+input[type='checkbox'].card1{
+	background-image: url("../assets/cards/1.png"); 
+}
+input[type='checkbox'].card2{
+	background-image: url("../assets/cards/2.png"); 
+}
+input[type='checkbox'].card3{
+	background-image: url("../assets/cards/3.png"); 
+}
+input[type='checkbox'].card4{
+	background-image: url("../assets/cards/4.png"); 
+}
+input[type='checkbox'].card5{
+	background-image: url("../assets/cards/5.png"); 
+}
+input[type='checkbox'].card6{
+	background-image: url("../assets/cards/6.png"); 
+}
+input[type='checkbox'].card7{
+	background-image: url("../assets/cards/7.png"); 
+}
+input[type='checkbox'].card8{
+	background-image: url("../assets/cards/8.png"); 
+}
+input[type='checkbox'].card9{
+	background-image: url("../assets/cards/9.png"); 
+}
+input[type='checkbox'].card10{
+	background-image: url("../assets/cards/10.png"); 
+}
+input[type='checkbox'].card11{
+	background-image: url("../assets/cards/11.png"); 
+}
+input[type='checkbox'].card1:checked{
+	background-image: url("../assets/cards/1.gif"); 
+}
+input[type='checkbox'].card2:checked{
+	background-image: url("../assets/cards/2.gif"); 
+}
+input[type='checkbox'].card3:checked{
+	background-image: url("../assets/cards/3.gif"); 
+}
+input[type='checkbox'].card4:checked{
+	background-image: url("../assets/cards/4.gif"); 
+}
+input[type='checkbox'].card5:checked{
+	background-image: url("../assets/cards/5.gif"); 
+}
+input[type='checkbox'].card6:checked{
+	background-image: url("../assets/cards/6.gif"); 
+}
+input[type='checkbox'].card7:checked{
+	background-image: url("../assets/cards/7.gif"); 
+}
+input[type='checkbox'].card8:checked{
+	background-image: url("../assets/cards/8.gif"); 
+}
+input[type='checkbox'].card9:checked{
+	background-image: url("../assets/cards/9.gif"); 
+}
+input[type='checkbox'].card10:checked{
+	background-image: url("../assets/cards/10.gif"); 
+}
+input[type='checkbox'].card11:checked{
+	background-image: url("../assets/cards/11.gif"); 
+}
+.miniature{
+	margin-right:5px;
+	width:97px;
+	height:143px;
+	border: solid 1px grey;
+	border-radius:10px;
+}
