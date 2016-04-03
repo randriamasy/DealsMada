@@ -41,8 +41,8 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand"><a href="<?= BASE_URL ?>"> Home </a></li>
-                    <li><a href="<?= BASE_URL ?>/city">Cities</a></li>
-                    <li><a href="<?= BASE_URL ?>/logout">Close App</a></li>
+                    <li><a href="<?= BASE_URL ?>/cities">Cities</a></li>
+                    <li><a href="<?= BASE_URL ?>/logout">Close</a></li>
                 </ul>
             </div>
             <!-- /#sidebar-wrapper -->

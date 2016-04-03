@@ -11,7 +11,6 @@ require_once './model/city.class.php';
  * Adding Middle Layer to authenticate every request
  * Checking if the request has valid $_SESSION
  */
-
 function authenticate(\Slim\Route $route) {
     $app = \Slim\Slim::getInstance();
     if (!isset($_SESSION ['login']) || null == $_SESSION ['login']) {
@@ -119,7 +118,7 @@ $app->get('/', 'authenticate', function () use($app) {
 // =======================================================================================
 // CITY
 // =======================================================================================
-$app->get('/city', function () use($app) {
+$app->get('/cities', function () use($app) {
     $cities = City::selectAll();
     $app->render('container.php', array(
         'content' => 'content_city_list.php',
@@ -128,9 +127,25 @@ $app->get('/city', function () use($app) {
     ));
 });
 
-$app->get('/city/delete/', function ($id) use($app) {
+$app->get('/city', function () use($app) {
+    $app->render('container.php', array(
+        'content' => 'content_city_item.php',
+        'rootPath' => '../'
+    ));
+});
+
+$app->post('/city/add', function () use($app) {
+    verifyRequiredParams(array(
+        'name'
+    ));
+    $name = $_REQUEST["name"];
+    City::insert($name);
+    $app->redirect(BASE_URL . '/cities');
+});
+
+$app->get('/city/delete/:id', function ($id) use($app) {
     City::deleteById($id);
-    $app->redirect(BASE_URL . '/city');
+    $app->redirect(BASE_URL . '/cities');
 });
 
 // =======================================================================================
