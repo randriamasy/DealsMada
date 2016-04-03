@@ -7,6 +7,8 @@ error_reporting(E_ALL);
  */
 define('DEBUG', true);
 
+define('APP_NAME', 'DealsMada');
+
 /**
  * Server configuration
  */

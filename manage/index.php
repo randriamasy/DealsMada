@@ -4,6 +4,7 @@ session_cache_limiter(false);
 session_start();
 
 require_once './libs/Slim/Slim.php';
+require_once './model/config.php';
 //require_once './model/city.class.php';
 
 /**
@@ -108,8 +109,7 @@ $app->get('/logout', function () use($app) {
 // =======================================================================================
 // HOME
 // =======================================================================================
-//$app->get('/', 'authenticate', function () use($app) {
-$app->get('/', function () use($app) {
+$app->get('/', 'authenticate', function () use($app) {
 
     $app->render('container.php', array(
         'content' => 'content_home.php'

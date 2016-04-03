@@ -8,15 +8,15 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Operator</title>
+<title><?=APP_NAME?></title>
 
 <link href="css/login.css" rel="stylesheet">
 </head>
 <body>
 	<section class="container">
 		<div class="login">
-			<h1>DealsMada Manage</h1>
-			<form method="post" action="<?=BASE_URL?>/login">
+			<h1><?=APP_NAME?> Manage</h1>
+                        <form method="post" action="<?=  BASE_URL ?>/login">
 				<p>
 					<input type="text" name="login" value="" placeholder="Login" />
 				</p>
